@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: local
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org.quartz.threadPool.threadCount: 5
+      org.quartz.scheduler.instanceName: mobility
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      org.quartz.jobStore.useProperties: true
+      org.quartz.jobStore.isClustered: true
+
+naver:
+  key: ${NAVER_KEY}
+  secret: ${NAVER_SECRET}
+  url: https://naveropenapi.apigw.ntruss.com
+
+---
+server:
+  port: 8080
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:4306/mobility
+    driverClassName: org.mariadb.jdbc.Driver
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 10
+      connection-test-query: select 1
+      connection-timeout: 10000
+      pool-name: pool-primary
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        show_sql: true
+        format_sql: true
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework.cloud: debug
+
+---
+server:
+  port: 8080
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://localhost:4306/mobility
+    driverClassName: org.mariadb.jdbc.Driver
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 10
+      connection-test-query: select 1
+      connection-timeout: 10000
+      pool-name: pool-primary
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        show_sql: true
+        format_sql: true

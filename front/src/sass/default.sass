@@ -1,0 +1,131 @@
+@import default/tables
+@import default/custom
+
+.min-125
+  min-width: 125px
+
+.min-200
+  min-width: 200px
+
+.min-300
+  min-width: 300px
+
+.max-80
+  max-width: 80px
+
+.max-100
+  max-width: 100px
+
+.max-120
+  max-width: 120px
+
+.max-130
+  max-width: 130px
+
+.max-150
+  max-width: 150px
+
+.max-160
+  max-width: 160px
+
+.max-165
+  max-width: 165px
+
+.max-200
+  max-width: 200px
+
+.max-220
+  max-width: 220px
+
+.max-250
+  max-width: 250px
+
+.max-260
+  max-width: 260px
+
+.max-270
+  max-width: 270px
+
+.max-300
+  max-width: 300px
+
+.max-350
+  max-width: 350px
+
+.max-400
+  max-width: 400px
+
+.max-420
+  max-width: 420px
+
+.max-450
+  max-width: 450px
+
+.fill-width
+  width: 100%
+
+.pre-formatted
+  white-space: pre
+
+.pointer-cursor
+  cursor: pointer
+
+.default-cursor
+  cursor: default
+
+.position-relative
+  position: relative
+
+.readonly-text.v-text-field
+  .v-input__control
+    .v-input__slot
+      cursor: default
+      transition: none
+
+      input
+        cursor: default
+
+      &:before, &:after
+        border-image: repeating-linear-gradient(to right, rgba(0, 0, 0, 0.38) 0px, rgba(0, 0, 0, 0.38) 2px, transparent 2px, transparent 4px) 1 repeat
+        border-image-source: repeating-linear-gradient(to right, rgba(0, 0, 0, 0.38) 0px, rgba(0, 0, 0, 0.38) 2px, transparent 2px, transparent 4px)
+        border-image-slice: 1
+        border-image-width: 1
+        border-image-outset: 0
+        border-image-repeat: repeat
+        transition: none
+
+.v-data-table
+  tbody
+    tr
+      td
+        word-break: break-word
+
+.fc
+  &.v-data-table
+    &.date-picker-outer-wrapper
+      .v-data-table__wrapper
+        overflow: inherit
+        overflow-y: visible
+
+    .v-data-table-header
+      th.sortable
+        .v-data-table-header__icon
+          opacity: 1
+
+
+.theme--light
+  &.v-stepper
+    overflow: inherit
+    overflow-y: visible
+
+    .v-stepper__items
+      overflow: inherit
+      overflow-y: visible
+
+    .v-stepper__wrapper
+      overflow: inherit
+      overflow-y: visible
+
+.v-application
+  a
+    text-decoration: none

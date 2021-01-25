@@ -1,0 +1,63 @@
+.v-data-table.theme--light
+  .v-data-table__wrapper
+    table
+      thead
+        tr
+          th
+            border-left: solid 1px #ddd
+            border-top: solid 1px #eee
+            background-color: #F5F5F5
+            font-weight: bold
+            font-size: 14px
+            &:nth-child(1)
+              border-left: solid 0px
+              //border-top-left-radius: 4px
+            &:last-child
+              //border-top-right-radius: 4px
+      tbody
+        tr
+          td
+            border-left: solid 1px #ddd
+            border-bottom: solid 1px #ddd
+            &:nth-child(1)
+              border-left: solid 0px
+            font-weight: 400
+  &.fc
+    .v-data-table__wrapper
+      table
+        thead
+          tr.v-data-table__progress
+            th
+              padding: 0
+          tr
+            th
+              border-left: solid 1px #ddd
+              border-top: solid 1px #ddd
+              background-color: #F5F5F5
+              font-weight: bold
+              font-size: 14px
+              &:nth-child(1)
+                border-left: solid 1px #ddd
+                //border-top-left-radius: 4px
+              &:last-child
+                border-right: solid 1px #ddd
+                //border-top-right-radius: 4px
+        tbody
+          tr
+            td
+              border-left: solid 1px #ddd
+              border-bottom: solid 1px #ddd
+              &:nth-child(1)
+                border-left: solid 1px #ddd
+              &:last-child
+                border-right: solid 1px #ddd
+              font-weight: 400
+              padding: 12px 8px
+  &.fc.no-th
+    .v-data-table__wrapper
+      table
+        tbody
+          tr
+            &:nth-child(1)
+              td
+                border-top: solid 1px #ddd
