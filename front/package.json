@@ -3,7 +3,7 @@
     "version": "1.1.0",
     "private": true,
     "scripts": {
-        "build:local": "vue-cli-service build --mode local",
+        "build": "vue-cli-service build --mode local",
         "build:prod": "vue-cli-service build --mode prod",
         "serve": "vue-cli-service serve --mode local",
         "stop": "pkill -SIGINT node",
