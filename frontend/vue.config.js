@@ -8,7 +8,7 @@ module.exports = {
     proxy: 'http://localhost:8080'
   },
 
-  transpileDependencies: ['vue-world-map', 'vuetify'],
+  transpileDependencies: ['vuetify'],
 
   pluginOptions: {
     i18n: {
