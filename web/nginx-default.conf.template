@@ -15,11 +15,9 @@ server {
     proxy_pass $was;
     proxy_set_header Host $host;
     proxy_set_header User-Agent $http_user_agent;
-    access_log on;
   }
 
   location / {
     try_files $uri $uri/ /index.html;
-    access_log off;
   }
 }
