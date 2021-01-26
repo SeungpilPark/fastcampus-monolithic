@@ -1,16 +1,62 @@
 #!/bin/bash
-export RESOLVER_IP="some DB connection"
-export WAS_HOST="my user"
 
-# s3 download
-# unzip
-# cd unzpi folger
-rm /etc/nginx/conf.d/default.conf && rm /etc/nginx/nginx.conf
+# envs
+export VERSION=v1.0
+export RESOLVER_IP="VPC 의 DNS RESOLVE IP"
+export WAS_HOST="Spring Boot ALB DNS"
 
-cp -R dist /var/www/html
+yum update -y
+
+# awslogs
+yum install -y awslogs
+/etc/awslogs/awscli.conf 수정
+[plugins]
+cwlogs = cwlogs
+[default]
+region = ap-northeast-1
+
+/etc/awslogs/awslogs.conf 수정
+[web-access-log]
+file = /var/log/nginx/access.log
+log_group_name = /var/log/fc-monolithic/access.log
+log_stream_name = {instance_id}
+datetime_format = %b %d %H:%M:%S
+
+[web-error-log]
+file = /var/log/nginx/error.log
+log_group_name = /var/log/fc-monolithic/error.log
+log_stream_name = {instance_id}
+datetime_format = %b %d %H:%M:%S
+
+시작
+systemctl start awslogsd
+
+# node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install node
+node -e "console.log('Running Node.js ' + process.version)"
+
+# git
+yum install git -y
+
+# nginx
+amazon-linux-extras install nginx1 -y
+
+# s3 download & unzip
+aws s3 cp s3://${BUCKET}/${VERSION}/web.zip web.zip
+unzip web.zip
+
+# Prepare contents & nginx conf
+cd web
+rm -rf /etc/nginx/nginx.conf
+mkdir -p /var/www/html
+cp -R dist/* /var/www/html/
 cp healthchk.html /var/www/html/healthchk.html
-cp healthchk.html /var/www/html/hc/healthchk.html
 cp nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
-cp nginx.conf /etc/nginx/nginx.conf
+cp nginx.conf /etc/nginx/nginx.conf -f
 envsubst '${RESOLVER_IP} ${WAS_HOST}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
-nginx -g daemon off;
+
+# Start Nginx
+service nginx start
+
