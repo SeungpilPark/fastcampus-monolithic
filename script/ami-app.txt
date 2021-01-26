@@ -1,0 +1,16 @@
+#!/bin/bash
+export RESOLVER_IP="some DB connection"
+export WAS_HOST="my user"
+
+# s3 download
+# unzip
+# cd unzpi folger
+rm /etc/nginx/conf.d/default.conf && rm /etc/nginx/nginx.conf
+
+cp -R dist /var/www/html
+cp healthchk.html /var/www/html/healthchk.html
+cp healthchk.html /var/www/html/hc/healthchk.html
+cp nginx-default.conf.template /etc/nginx/conf.d/default.conf.template
+cp nginx.conf /etc/nginx/nginx.conf
+envsubst '${RESOLVER_IP} ${WAS_HOST}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+nginx -g daemon off;
