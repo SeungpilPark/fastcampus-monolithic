@@ -1,5 +1,8 @@
 #!bin bash
 
+export BUCKET=fc-monolothic-ec2-logs
+export VERSION=v1.0
+
 sudo yum update -y
 
 # 처음 빌드때는 clone
@@ -20,9 +23,6 @@ cd ../
 gradle :backend:clean :backend:build
 
 # Zip and Upload
-export BUCKET=fc-monolothic-ec2-logs
-export VERSION=v1.0
-
 zip -r web.zip web
 aws s3 cp web.zip s3://${BUCKET}/${VERSION}/web.zip
 aws s3 cp backend/build/libs/backend.jar s3://${BUCKET}/${VERSION}/app.jar

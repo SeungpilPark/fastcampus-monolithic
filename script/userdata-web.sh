@@ -1,21 +1,25 @@
 #!/bin/bash
 
 # envs
+export BUCKET=fc-monolothic-ec2-logs
 export VERSION=v1.0
-export RESOLVER_IP="VPC 의 DNS RESOLVE IP"
-export WAS_HOST="Spring Boot ALB DNS"
+export REGION="ap-northeast-1"
+export RESOLVER_IP="10.10.0.2"
+export WAS_HOST="app.fc-monolithic.in"
 
 yum update -y
 
-# awslogs
+# awslogs configuration & start
 yum install -y awslogs
-/etc/awslogs/awscli.conf 수정
+
+tee -a /etc/awslogs/awscli.conf > /dev/null <<EOF
 [plugins]
 cwlogs = cwlogs
 [default]
-region = ap-northeast-1
+region = ${REGION}
+EOF
 
-/etc/awslogs/awslogs.conf 수정
+tee -a /etc/awslogs/awslogs.conf > /dev/null <<EOF
 [web-access-log]
 file = /var/log/nginx/access.log
 log_group_name = /var/log/fc-monolithic/access.log
@@ -27,8 +31,8 @@ file = /var/log/nginx/error.log
 log_group_name = /var/log/fc-monolithic/error.log
 log_stream_name = {instance_id}
 datetime_format = %b %d %H:%M:%S
+EOF
 
-시작
 systemctl start awslogsd
 
 # node

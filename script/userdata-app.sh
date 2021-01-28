@@ -1,34 +1,38 @@
 #!/bin/bash
 
 # envs
+export BUCKET=fc-monolothic-ec2-logs
 export VERSION=v1.0
+export REGION="ap-northeast-1"
 export SPRING_PROFILES_ACTIVE=prod
-export SPRING_DATASOURCE_URL="RDS 주소"
-export SPRING_DATASOURCE_USERNAME="RDS 사용자이름"
-export SPRING_DATASOURCE_PASSWORD="RDS 패스워드"
-export NAVER_KEY="네이버 클라이언트 키"
-export NAVER_SECRET="네이버 클라이언트 시크릿"
+export SPRING_DATASOURCE_URL="jdbc:mysql://db.fc-monolithic.in:3306/mobility"
+export SPRING_DATASOURCE_USERNAME="root"
+export SPRING_DATASOURCE_PASSWORD="password"
+export NAVER_KEY=""
+export NAVER_SECRET=""
 export JAVA_OPTS="-server -Xms512m -Xmx512m -XX:NewRatio=3 -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -verbose:gc -Xlog:gc:gc.log -XX:+DisableExplicitGC -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -Dnetworkaddress.cache.ttl=0"
 
 yum update -y
 
-# awslogs
+# awslogs configuration & start
 yum install -y awslogs
-/etc/awslogs/awscli.conf 수정
+
+tee -a /etc/awslogs/awscli.conf > /dev/null <<EOF
 [plugins]
 cwlogs = cwlogs
 [default]
-region = ap-northeast-1
+region = ${REGION}
+EOF
 
-/etc/awslogs/awslogs.conf 수정
+tee -a /etc/awslogs/awslogs.conf > /dev/null <<EOF
 [app-log]
 file = /var/log/spring/app.log
 log_group_name = /var/log/fc-monolithic/app.log
 log_stream_name = {instance_id}
 datetime_format = %b %d %H:%M:%S
+EOF
 
-시작
-sudo systemctl start awslogsd
+systemctl start awslogsd
 
 # git & jdk 11
 yum install git -y
