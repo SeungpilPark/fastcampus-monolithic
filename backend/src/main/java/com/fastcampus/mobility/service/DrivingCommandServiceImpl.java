@@ -150,6 +150,10 @@ public class DrivingCommandServiceImpl implements DrivingCommandService {
     if (vehicleDto.isDrivingYn()) {
       throw new BusinessException("차량이 이미 운행중이어서 배차수락을 할 수 없습니다.");
     }
+    drivingDto.getDrivingRequests().stream()
+        .filter(dispatchRequest -> dispatchRequest.getVehicleId().equals(vehicleId))
+        .findAny()
+        .orElseThrow(() -> new BusinessException("배차요청된 차량이 아니어서 배차수락을 할 수 없습니다."));
     try {
       // 경로 계산
       RouteResponse routeResponse = mapService.addPath(

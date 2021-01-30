@@ -18,8 +18,8 @@ spring:
       org.quartz.jobStore.isClustered: true
 
 naver:
-  key: ${NAVER_KEY}
-  secret: ${NAVER_SECRET}
+  key: ${NAVER_KEY:default-key}
+  secret: ${NAVER_SECRET:default-secret}
   url: https://naveropenapi.apigw.ntruss.com
 
 ---

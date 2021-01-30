@@ -99,7 +99,6 @@ subprojects {
         testCompile "org.codehaus.groovy:groovy:${groovyVersion}"
     }
 
-
     sourceSets {
         integrationTest {
             java {
@@ -130,7 +129,6 @@ subprojects {
         outputs.upToDateWhen { false }
     }
 
-    bootJar.enabled = true
     jar.enabled = false
     jar.dependsOn test
 }
