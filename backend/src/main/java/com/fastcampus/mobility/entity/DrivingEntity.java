@@ -42,10 +42,10 @@ public class DrivingEntity extends AbstractEntity {
   @Column(name = "dispatch_vehicle_count", nullable = false, columnDefinition = "TINYINT")
   private int dispatchVehicleCount;
 
-  @Column(name = "driving_start_date", nullable = false)
+  @Column(name = "driving_start_date")
   private LocalDateTime drivingStartDate;
 
-  @Column(name = "driving_end_date", nullable = false)
+  @Column(name = "driving_end_date")
   private LocalDateTime drivingEndDate;
 
   @Builder
@@ -64,4 +64,3 @@ public class DrivingEntity extends AbstractEntity {
     this.updateDate = updateDate;
   }
 }
-
