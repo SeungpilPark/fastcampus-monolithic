@@ -8,10 +8,12 @@ import com.fastcampus.mobility.entity.DrivingStatus
 import com.fastcampus.mobility.service.spec.DrivingCommandService
 import com.fastcampus.mobility.service.spec.DrivingDomainService
 import com.fastcampus.mobility.service.spec.VehicleCommandService
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional
+@Slf4j
 class DrivingCommandServiceIntegrationTest extends IntegrationTestSupport {
 
     @Autowired
@@ -29,7 +31,6 @@ class DrivingCommandServiceIntegrationTest extends IntegrationTestSupport {
         vehicleAddCommand.setLicense("A1234")
         vehicleAddCommand.setCoordinates("127.1302485,37.3752388")
         def vehicleDto = vehicleCommandService.vehicleAdd(vehicleAddCommand)
-
 
         def addCommand = new DrivingAddCommand()
         addCommand.setBoardingCoordinates("127.1296048,37.3807975")
