@@ -15,11 +15,14 @@ const router = new Router({
       component: () => import('@/views/page/Index')
       .then(page => page)
       .catch(() => Refresh),
-      redirect: { name: 'drivingList' },
+      redirect: {name: 'drivingList'},
       children: [
         {
           name: 'drivingList',
           path: 'driving',
+          meta: {
+            title: '운행리스트',
+          },
           component: () => import('@/views/page/DrivingList')
           .then(page => page)
           .catch(() => Refresh),
@@ -27,6 +30,9 @@ const router = new Router({
         {
           name: 'drivingInfo',
           path: 'driving/:id',
+          meta: {
+            title: '운행상세',
+          },
           component: () => import('@/views/page/DrivingInfo')
           .then(page => page)
           .catch(() => Refresh),
@@ -39,6 +45,9 @@ const router = new Router({
         {
           name: 'vehicleList',
           path: 'vehicle',
+          meta: {
+            title: '차량리스트',
+          },
           component: () => import('@/views/page/VehicleList')
           .then(page => page)
           .catch(() => Refresh),
@@ -46,6 +55,9 @@ const router = new Router({
         {
           name: 'userList',
           path: 'user',
+          meta: {
+            title: '사용자리스트',
+          },
           component: () => import('@/views/page/UserList')
           .then(page => page)
           .catch(() => Refresh),
@@ -61,6 +73,9 @@ const router = new Router({
         {
           name: 'login',
           path: 'login',
+          meta: {
+            title: '로그인',
+          },
           component: () => import('@/views/auth/Login')
           .then(page => page)
           .catch(() => Refresh),
@@ -73,6 +88,9 @@ const router = new Router({
         {
           name: 'deny',
           path: 'deny',
+          meta: {
+            title: '접근차단',
+          },
           component: () => import('@/views/auth/Deny')
           .then(page => page)
           .catch(() => Refresh),
@@ -88,6 +106,9 @@ const router = new Router({
         {
           name: '404error',
           path: '',
+          meta: {
+            title: '404',
+          },
           component: () => import('@/views/error/Error')
           .then(page => page)
           .catch(() => Refresh),
@@ -120,7 +141,7 @@ router.beforeEach((to, from, next) => {
       })
     } else {
       if (response.role !== '시스템관리' && to.name === 'userList') {
-        next({ name: 'deny' })
+        next({name: 'deny'})
       } else {
         next()
       }
@@ -129,5 +150,11 @@ router.beforeEach((to, from, next) => {
   .catch(e => {
     console.log(e)
   })
+})
+
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
 })
 export default router

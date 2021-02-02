@@ -1,5 +1,5 @@
-const path = require('path')
-process.env.VUE_APP_VUETIFY_VERSION = require('./node_modules/vuetify/package.json').version
+process.env.VUE_APP_VUETIFY_VERSION = require(
+    './node_modules/vuetify/package.json').version
 
 module.exports = {
   devServer: {
