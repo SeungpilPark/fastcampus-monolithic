@@ -6,31 +6,31 @@ import com.fastcampus.mobility.dto.VehicleDto;
 import com.fastcampus.mobility.dto.command.DrivingAddCommand;
 import com.fastcampus.mobility.dto.search.DrivingSearchDto;
 import com.fastcampus.mobility.map.RouteResponse;
-import com.mysql.cj.log.Log;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface DrivingDomainService {
 
-  DrivingDto get(final Long drivingId);
+    DrivingDto get(final Long drivingId);
 
-  Page<DrivingDto> search(DrivingSearchDto drivingSearchDto, Pageable pageable);
+    Page<DrivingDto> search(DrivingSearchDto drivingSearchDto, Pageable pageable);
 
-  DrivingDto insert(final DrivingAddCommand addCommand);
+    DrivingDto insert(final DrivingAddCommand addCommand);
 
-  void updateSystemFail(final Long drivingId);
+    void updateSystemFail(final Long drivingId);
 
-  void updateDispatchFail(final Long drivingId);
+    void updateDispatchFail(final Long drivingId);
 
-  void updateDispatchRequest(final Long drivingId, final Integer attempts,
-      final List<VehicleDto> candidateVehicles);
+    void updateDispatchRequest(final Long drivingId, final Integer attempts,
+                               final List<VehicleDto> candidateVehicles);
 
-  void updateDriving(final Long drivingId, final Long vehicleId, final RouteResponse routeResponse);
+    void updateDriving(final Long drivingId, final Long vehicleId, final RouteResponse routeResponse);
 
-  void updateBoarding(final Long drivingId);
+    void updateBoarding(final Long drivingId);
 
-  void updateDrivingEnd(final Long drivingId);
+    void updateDrivingEnd(final Long drivingId);
 
-  void updateDrivingCancel(final Long drivingId);
+    void updateDrivingCancel(final Long drivingId);
 }

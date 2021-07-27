@@ -1,6 +1,6 @@
 package com.fastcampus.mobility.dto.search;
 
-import com.fastcampus.mobility.entity.DrivingStatus;
+import com.fastcampus.mobility.domain.enums.DrivingStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.fastcampus.mobility.dto;
 
-import com.fastcampus.mobility.entity.VehicleCoordinatesEntity;
+import com.fastcampus.mobility.domain.entity.VehicleCoordinatesEntity;
 import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDateTime;
 import lombok.Builder;

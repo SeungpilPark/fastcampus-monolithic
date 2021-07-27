@@ -1,7 +1,6 @@
 package com.fastcampus.mobility.dto;
 
-import com.fastcampus.mobility.entity.UserEntity;
-import com.fastcampus.mobility.entity.UserRole;
+import com.fastcampus.mobility.domain.entity.UserEntity;
 import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDateTime;
 import lombok.Builder;

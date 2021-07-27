@@ -6,7 +6,7 @@ import com.fastcampus.mobility.dto.UserDto;
 import com.fastcampus.mobility.dto.command.UserAddCommand;
 import com.fastcampus.mobility.dto.command.UserUpdateCommand;
 import com.fastcampus.mobility.dto.search.UserSearchDto;
-import com.fastcampus.mobility.entity.UserEntity;
+import com.fastcampus.mobility.domain.entity.UserEntity;
 import com.fastcampus.mobility.repository.UserRepository;
 import com.fastcampus.mobility.service.spec.UserDomainService;
 import lombok.extern.slf4j.Slf4j;

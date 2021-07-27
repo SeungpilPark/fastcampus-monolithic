@@ -1,6 +1,3 @@
-group = 'com.fastcampus'
-version = '0.0.1-SNAPSHOT'
-
 buildscript {
     ext {
         springBootVersion = '2.3.7'
@@ -8,9 +5,8 @@ buildscript {
         lombokVersion = '1.18.4'
         groovyVersion = '2.5.9'
         spockSpringVersion = '1.3-groovy-2.5'
-        mariadbJavaClientVersion = "2.4.1"
+        mariadbJavaClientVersion = "2.7.0"
         flywayVersion = '5.1.4'
-        querydslGradlePluginVersion = "1.0.10"
         queryDslVersion = '4.2.1'
     }
     repositories {
@@ -20,45 +16,10 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootGradleVersion}"
         classpath "gradle.plugin.com.boxfuse.client:gradle-plugin-publishing:${flywayVersion}"
-        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:$querydslGradlePluginVersion")
     }
 }
 
-def querydslProjects = [project(':backend')]
-configure(querydslProjects) {
-    apply plugin: "com.ewerk.gradle.plugins.querydsl"
-
-    dependencies {
-        compile("com.querydsl:querydsl-jpa")
-        compile("com.querydsl:querydsl-apt")
-    }
-
-    def querydslSrcDir = "src/main/generated"
-
-    querydsl {
-        library = "com.querydsl:querydsl-apt:${queryDslVersion}"
-        jpa = true
-        querydslSourcesDir = querydslSrcDir
-    }
-    compileQuerydsl {
-        options.annotationProcessorPath = configurations.querydsl
-    }
-    configurations {
-        querydsl.extendsFrom compileClasspath
-    }
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src/main/java", querydslSrcDir]
-            }
-        }
-    }
-    tasks.withType(JavaCompile) {
-        options.annotationProcessorGeneratedSourcesDirectory = file(querydslSrcDir)
-    }
-}
-
-subprojects {
+allprojects {
 
     apply plugin: 'java'
     apply plugin: 'groovy'
@@ -66,6 +27,8 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
+    group = 'com.fastcampus'
+    version = '0.0.1-SNAPSHOT'
     targetCompatibility = '11'
     sourceCompatibility = '11'
     compileJava.options.encoding = 'UTF-8'
@@ -97,36 +60,6 @@ subprojects {
         testCompile('org.spockframework:spock-core:1.2-groovy-2.4')
         testCompile('org.spockframework:spock-spring:1.2-groovy-2.4')
         testCompile "org.codehaus.groovy:groovy:${groovyVersion}"
-    }
-
-    sourceSets {
-        integrationTest {
-            java {
-                compileClasspath += main.output + test.output
-                runtimeClasspath += main.output + test.output
-                srcDir file('src/integrationTest/java')
-            }
-            groovy {
-                compileClasspath += main.output + test.output
-                runtimeClasspath += main.output + test.output
-                srcDir file('src/integrationTest/groovy')
-            }
-            resources.srcDir file('src/integrationTest/resources')
-        }
-    }
-
-    configurations {
-        integrationTestCompile.extendsFrom testCompile
-        integrationTestRuntime.extendsFrom testRuntime
-    }
-
-    task integrationTest(type: Test) {
-        afterTest { desc, result ->
-            logger.quiet "Executing integration test ${desc.name} [${desc.className}] with result: ${result.resultType}"
-        }
-        testClassesDirs = sourceSets.integrationTest.output.classesDirs
-        classpath = sourceSets.integrationTest.runtimeClasspath
-        outputs.upToDateWhen { false }
     }
 
     jar.enabled = false

@@ -1,6 +1,6 @@
 package com.fastcampus.mobility.security;
 
-import com.fastcampus.mobility.entity.UserEntity;
+import com.fastcampus.mobility.domain.entity.UserEntity;
 import com.fastcampus.mobility.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;

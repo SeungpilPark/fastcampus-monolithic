@@ -1,7 +1,7 @@
 package com.fastcampus.mobility.service.helper;
 
 import com.fastcampus.mobility.dto.DrivingDto;
-import com.fastcampus.mobility.entity.DrivingStatus;
+import com.fastcampus.mobility.domain.enums.DrivingStatus;
 import com.fastcampus.mobility.scheduler.CoordinatesScheduleService;
 import com.fastcampus.mobility.service.spec.DrivingDomainService;
 import com.fastcampus.mobility.service.spec.VehicleDomainService;

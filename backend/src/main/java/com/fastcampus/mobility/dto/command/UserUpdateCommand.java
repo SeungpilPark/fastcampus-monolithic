@@ -1,6 +1,5 @@
 package com.fastcampus.mobility.dto.command;
 
-import com.fastcampus.mobility.entity.UserRole;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;

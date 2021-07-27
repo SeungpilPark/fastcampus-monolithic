@@ -8,7 +8,7 @@ import com.fastcampus.mobility.dto.command.DispatchAcceptanceCommand;
 import com.fastcampus.mobility.dto.command.DrivingAddCommand;
 import com.fastcampus.mobility.dto.search.BooleanCondition;
 import com.fastcampus.mobility.dto.search.VehicleSearchDto;
-import com.fastcampus.mobility.entity.DrivingStatus;
+import com.fastcampus.mobility.domain.enums.DrivingStatus;
 import com.fastcampus.mobility.map.CoordinatesResponse;
 import com.fastcampus.mobility.map.MapService;
 import com.fastcampus.mobility.map.RouteResponse;

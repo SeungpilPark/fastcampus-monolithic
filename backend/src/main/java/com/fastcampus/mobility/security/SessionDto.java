@@ -1,7 +1,7 @@
 package com.fastcampus.mobility.security;
 
-import com.fastcampus.mobility.entity.UserEntity;
-import com.fastcampus.mobility.entity.UserRole;
+import com.fastcampus.mobility.domain.entity.UserEntity;
+
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Getter;

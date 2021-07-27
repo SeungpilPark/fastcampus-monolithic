@@ -1,6 +1,5 @@
 package com.fastcampus.mobility.dto.search;
 
-import com.fastcampus.mobility.entity.UserRole;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
